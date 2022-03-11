@@ -1,3 +1,6 @@
+[![Molecule CI/CD](https://github.com/somnoynadno/ansible-role-dockerized-services/actions/workflows/main.yml/badge.svg)](https://github.com/somnoynadno/ansible-role-dockerized-services/actions/workflows/main.yml)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 Dockerized Services
 ===================
 

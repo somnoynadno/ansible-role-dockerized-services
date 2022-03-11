@@ -20,6 +20,6 @@
       vars:
         docker_compose_version: 1.16.0
 
-    - name: Include dockerized-services role
+    - name: Include somnoynadno.dockerized_services role
       include_role:
-        name: ansible-role-dockerized-services
+        name: somnoynadno.dockerized_services
