@@ -15,13 +15,15 @@
         msg: "git, docker and docker-compose should be installed"
 
 - name: Clone repositories and pull changes
+  vars:
+    default_key_file: "/home/{{ dockerized_services_user }}/.ssh/id_rsa"
   ansible.builtin.git:
     repo: "{{ item.repository }}"
     dest: "{{ dockerized_services_base_folder }}/{{ item.name }}"
     version: "{{ item.branch | default('master') }}"
     update: "{{ item.update | default('true') | bool }}"
     force: "{{ item.force | default('true') | bool }}"
-    key_file: "{{ item.key_file | default('/home/{{ dockerized_services_user }}/.ssh/id_rsa') }}"
+    key_file: "{{ item.key_file | default(default_key_file) }}"
     umask: "{{ item.umask | default('0022')}}"
     accept_hostkey: true
   loop: "{{ dockerized_services_list }}"
