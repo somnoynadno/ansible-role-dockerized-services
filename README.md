@@ -59,15 +59,23 @@ Only tested on Ubuntu 18.04 and 20.04.
 May run on some other Linux distro, but not tested yet.
 
 
-Example Playbook
-----------------
+Example Usage
+-------------
 
-Just include this role in your playbook as follows:
+Just include this role in your `playbook.yml` and `requirements.yml` as follows:
 
 ```yaml
+# requirements.yml
+- src: https://github.com/somnoynadno/ansible-role-dockerized-services
+  name: ansible-role-dockerized-services
+  version: "v0.1.0"
+
+
+# playbook.yml
 - hosts: all
   roles:
     - ansible-role-dockerized-services
+
 ```
 
 License

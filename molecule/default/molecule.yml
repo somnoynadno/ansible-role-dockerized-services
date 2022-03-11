@@ -16,6 +16,12 @@ platforms:
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      
+  - name: ubuntu-focal
+    image: daangn/dind:ubuntu-20.04
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 provisioner:
   name: ansible
