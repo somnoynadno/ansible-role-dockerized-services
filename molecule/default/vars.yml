@@ -1,11 +1,13 @@
 ---
+__distro: "{{ ansible_facts['distribution'] }}-{{ ansible_facts['distribution_major_version'] }}"
+
 dockerized_services_user: "{{ lookup('env', 'USER') }}"
 dockerized_services_base_folder: "/home/{{ dockerized_services_user }}/services"
 
 dockerized_services_list: 
-  - name: "stub-{{ lookup('env', 'HOSTNAME') }}-up"
+  - name: "stub-{{ __distro }}-up"
     repository: "https://github.com/somnoynadno/dockerized-service-stub"
-  - name: "stub-{{ lookup('env', 'HOSTNAME') }}-down"
+  - name: "stub-{{ __distro }}-down"
     repository: "https://github.com/somnoynadno/dockerized-service-stub"
     up: false # this service should be down
 
