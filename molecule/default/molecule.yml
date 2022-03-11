@@ -9,7 +9,7 @@ driver:
 
 lint: |
   set -e
-  yamllint .
+  yamllint -c .yamllint.yml .
 
 platforms:
   - name: ubuntu-bionic
