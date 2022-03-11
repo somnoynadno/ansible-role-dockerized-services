@@ -1,0 +1,12 @@
+---
+dockerized_services_user: "{{ lookup('env', 'USER') }}"
+dockerized_services_base_folder: "/home/{{ dockerized_services_user }}/services"
+
+dockerized_services_list: 
+  - name: dockerized-service-stub-up
+    repository: "https://github.com/somnoynadno/dockerized-service-stub"
+  - name: dockerized-service-stub-down
+    repository: "https://github.com/somnoynadno/dockerized-service-stub"
+    up: false # this service should be down
+
+dockerized_services_management_enabled: true

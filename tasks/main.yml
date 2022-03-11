@@ -1,0 +1,48 @@
+---
+- name: Check dependencies
+  vars:
+    dependencies:
+      - git
+      - docker
+      - docker-compose
+  block:
+    - name: Check dependencies
+      shell: command -v "{{ item }}" >/dev/null 2>&1
+      changed_when: False
+      loop: "{{ dependencies }}"
+  rescue:
+    - fail:
+        msg: "git, docker and docker-compose should be installed"
+
+- name: Clone repositories and pull changes
+  ansible.builtin.git:
+    repo: "{{ item.repository }}"
+    dest: "{{ dockerized_services_base_folder }}/{{ item.name }}"
+    version: "{{ item.branch | default('master') }}"
+    update: "{{ item.update | default('true') | bool }}"
+    force: "{{ item.force | default('true') | bool }}"
+  loop: "{{ dockerized_services_list }}"
+
+- name: Manage dockerized services
+  block:
+    - name: Ensure that docker-compose.yml is exist
+      file:
+        path: "{{ dockerized_services_base_folder }}/{{ item.name }}/{{ docker_compose_file | default('docker-compose.yml') }}"
+        state: file
+      loop: "{{ dockerized_services_list }}"
+
+    - name: Run docker-compose up command
+      vars:
+        file: "{{ dockerized_services_base_folder }}/{{ item.name }}/{{ docker_compose_file | default('docker-compose.yml') }}"
+      ansible.builtin.command: docker-compose -f "{{ file }}" up --build -d
+      when: "item.up | default(true) | bool" 
+      loop: "{{ dockerized_services_list }}"
+
+    - name: Stop disabled services
+      vars:
+        file: "{{ dockerized_services_base_folder }}/{{ item.name }}/{{ docker_compose_file | default('docker-compose.yml') }}"
+      ansible.builtin.command: docker-compose -f "{{ file }}" down
+      when: "not (item.up | default(true)) | bool"
+      loop: "{{ dockerized_services_list }}"
+
+  when: dockerized_services_management_enabled | bool

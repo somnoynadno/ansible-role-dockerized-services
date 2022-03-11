@@ -1,0 +1,14 @@
+---
+dockerized_services_user: "{{ lookup('env', 'USER') }}"
+dockerized_services_base_folder: "/home/{{ dockerized_services_user }}/services"
+
+dockerized_services_list: []
+# - name: dockerized-service-stub # required
+#   repository: "https://github.com/somnoynadno/dockerized-service-stub" # required
+#   docker_compose_file: docker-compose.yml # docker-compose.yml by default
+#   branch: master # branch to checkout, master by default
+#   update: yes # should changes be pulled from origin, 'yes' by default
+#   force: yes # should the modified files be discarded, 'yes' by default
+#   up: true # should this service be up and running, 'true' by default
+
+dockerized_services_management_enabled: true

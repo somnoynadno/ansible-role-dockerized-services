@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: somnoynadno
+  role_name: dockerized_services
+  description: docker-compose services management
+  license: MIT
+
+  min_ansible_version: 2.10
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - 18.04
+
+  galaxy_tags:
+    - docker-compose
+    - service management
+
+dependencies: []

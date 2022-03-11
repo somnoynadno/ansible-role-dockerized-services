@@ -1,0 +1,33 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+
+  pre_tasks:
+    - include_vars: vars.yml
+
+  tasks:
+    - name: Check that repositories are actually cloned
+      ansible.builtin.git:
+        repo: "{{ item.repository }}"
+        dest: "{{ dockerized_services_base_folder }}/{{ item.name }}"
+      loop: "{{ dockerized_services_list }}"
+      check_mode: yes
+
+    - name: Ensure that enabled services are running
+      vars:
+        file: "{{ dockerized_services_base_folder }}/{{ item.name }}/{{ docker_compose_file | default('docker-compose.yml') }}"
+      ansible.builtin.command: docker-compose -f "{{ file }}" ps
+      register: command_result
+      failed_when: "'Up' not in command_result.stdout"
+      when: "item.up | default(true) | bool" 
+      loop: "{{ dockerized_services_list }}"
+
+    - name: Ensure that disabled services are stopped
+      vars:
+        file: "{{ dockerized_services_base_folder }}/{{ item.name }}/{{ docker_compose_file | default('docker-compose.yml') }}"
+      ansible.builtin.command: docker-compose -f "{{ file }}" ps
+      register: command_result
+      failed_when: "'Up' in command_result.stdout"
+      when: "not (item.up | default(true)) | bool"
+      loop: "{{ dockerized_services_list }}"

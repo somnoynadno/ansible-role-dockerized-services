@@ -1,0 +1,25 @@
+---
+- name: Converge
+  hosts: all
+
+  pre_tasks:
+    - include_vars: vars.yml
+    
+  tasks:
+    # - name: Install base packages
+    #   include_role:
+    #     name: base_packages
+
+    # - name: Install docker
+    #   include_role:
+    #     name: docker
+
+    - name: Install docker-compose
+      include_role:
+        name: docker-compose
+      vars:
+        docker_compose_version: 1.16.0
+
+    - name: Include dockerized-services role
+      include_role:
+        name: ansible-role-dockerized-services
