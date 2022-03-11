@@ -21,6 +21,9 @@
     version: "{{ item.branch | default('master') }}"
     update: "{{ item.update | default('true') | bool }}"
     force: "{{ item.force | default('true') | bool }}"
+    key_file: "{{ item.key_file | default('/home/{{ dockerized_services_user }}/.ssh/id_rsa') }}"
+    umask: "{{ item.umask | default('0022')}}"
+    accept_hostkey: true
   loop: "{{ dockerized_services_list }}"
 
 - name: Manage dockerized services
