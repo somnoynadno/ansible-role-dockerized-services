@@ -14,10 +14,6 @@
     #   include_role:
     #     name: docker
 
-    - name: Print all available facts
-      ansible.builtin.debug:
-        var: ansible_facts
-
     - name: Install docker-compose
       include_role:
         name: docker-compose
