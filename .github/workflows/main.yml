@@ -9,6 +9,10 @@ on:
     branches:
       - master
 
+defaults:
+  run:
+    working-directory: 'somnoynadno.dockerized-services'
+
 jobs:
   lint:
     name: Lint
