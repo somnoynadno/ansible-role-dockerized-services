@@ -35,6 +35,8 @@
       vars:
         file: "{{ dockerized_services_base_folder }}/{{ item.name }}/{{ docker_compose_file | default('docker-compose.yml') }}"
       ansible.builtin.command: docker-compose -f "{{ file }}" up --build -d
+      register: command_result
+      changed_when: "'up-to-date' not in command_result.stderr"
       when: "item.up | default(true) | bool" 
       loop: "{{ dockerized_services_list }}"
 
@@ -42,6 +44,8 @@
       vars:
         file: "{{ dockerized_services_base_folder }}/{{ item.name }}/{{ docker_compose_file | default('docker-compose.yml') }}"
       ansible.builtin.command: docker-compose -f "{{ file }}" down
+      register: command_result
+      changed_when: "'Stopping' in command_result.stderr"
       when: "not (item.up | default(true)) | bool"
       loop: "{{ dockerized_services_list }}"
 
