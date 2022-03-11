@@ -16,9 +16,9 @@ platforms:
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      
+
   - name: ubuntu-focal
-    image: daangn/dind:ubuntu-20.04
+    image: kvergun/ubuntu-20.04-dind:latest
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
