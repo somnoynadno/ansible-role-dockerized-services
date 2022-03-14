@@ -12,3 +12,4 @@ dockerized_services_list:
     up: false # this service should be down
 
 dockerized_services_management_enabled: true
+dockerized_services_skip_dependency_check: false

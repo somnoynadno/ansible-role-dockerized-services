@@ -13,6 +13,7 @@
   rescue:
     - fail:
         msg: "git, docker and docker-compose should be installed"
+  when: not dockerized_services_skip_dependency_check | default(false) | bool
 
 - name: Clone repositories and pull changes
   vars:

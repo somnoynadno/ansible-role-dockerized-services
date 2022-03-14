@@ -12,3 +12,4 @@ dockerized_services_list: []
 #   up: true # should this service be up and running, 'true' by default
 
 dockerized_services_management_enabled: true
+dockerized_services_skip_dependency_check: false

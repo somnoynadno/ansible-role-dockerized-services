@@ -68,7 +68,7 @@ Just include this role in your `playbook.yml` and `requirements.yml` as follows:
 # requirements.yml
 - src: https://github.com/somnoynadno/ansible-role-dockerized-services
   name: ansible-role-dockerized-services
-  version: "v0.1.1"
+  version: "v0.2.0"
 
 
 # playbook.yml
