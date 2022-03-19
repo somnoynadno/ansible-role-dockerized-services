@@ -1,5 +1,6 @@
 ---
 dockerized_services_user: "{{ lookup('env', 'USER') }}"
+dockerized_services_group: "{{ lookup('env', 'USER') }}"
 dockerized_services_base_folder: "/home/{{ dockerized_services_user }}/services"
 
 dockerized_services_list: []

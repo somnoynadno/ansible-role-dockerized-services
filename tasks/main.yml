@@ -29,6 +29,13 @@
     accept_hostkey: true
   loop: "{{ dockerized_services_list }}"
 
+- name: Change cloned repo owners
+  file:
+    path: "{{ dockerized_services_base_folder }}/{{ item.name }}"
+    owner: "{{ dockerized_services_user }}"
+    group: "{{ dockerized_services_group }}"
+  loop: "{{ dockerized_services_list }}"
+
 - name: Manage dockerized services
   block:
     - name: Ensure that docker-compose.yml is exist
