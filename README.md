@@ -33,6 +33,7 @@ Default variables are listed below (see `defaults/main.yml`), you can redefine t
 
 ```yaml
 dockerized_services_user: "{{ lookup('env', 'USER') }}"
+dockerized_services_group: "{{ lookup('env', 'USER') }}"
 # where the repositories will be cloned
 dockerized_services_base_folder: "/home/{{ dockerized_services_user }}/services"
 
@@ -68,7 +69,7 @@ Just include this role in your `playbook.yml` and `requirements.yml` as follows:
 # requirements.yml
 - src: https://github.com/somnoynadno/ansible-role-dockerized-services
   name: ansible-role-dockerized-services
-  version: "v0.2.0"
+  version: "v0.2.1"
 
 
 # playbook.yml

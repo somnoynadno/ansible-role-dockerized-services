@@ -1,7 +1,8 @@
 ---
 __distro: "{{ ansible_facts['distribution'] }}-{{ ansible_facts['distribution_major_version'] }}"
 
-dockerized_services_user: "{{ lookup('env', 'USER') }}"
+dockerized_services_user: root
+dockerized_services_group: root
 dockerized_services_base_folder: "/home/{{ dockerized_services_user }}/services"
 
 dockerized_services_list: 
