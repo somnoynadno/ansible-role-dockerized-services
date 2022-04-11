@@ -34,6 +34,7 @@
     path: "{{ dockerized_services_base_folder }}/{{ item.name }}"
     owner: "{{ dockerized_services_user }}"
     group: "{{ dockerized_services_group }}"
+    recurse: yes
   loop: "{{ dockerized_services_list }}"
 
 - name: Manage dockerized services
