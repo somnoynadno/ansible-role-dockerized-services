@@ -45,6 +45,7 @@ jobs:
         distro:
           - ubuntu-bionic
           - ubuntu-focal
+          - ubuntu-jammy
 
     steps:
       - name: Check out the codebase.
